@@ -2,7 +2,7 @@ import { Client, Collection, Intents, Message, MessageEmbed } from 'discord.js';
 import { connect } from 'mongoose';
 import path from 'path';
 import { readdirSync } from 'fs';
-import { Command, Event, Config, Task } from '../Interfaces';
+import { Command, Event, Config, Task, Category } from '../Interfaces';
 import ConfigJson from '../config.json';
 import { Logger, Severity } from './Logger';
 import chalk from 'chalk';
@@ -11,6 +11,7 @@ import chalk from 'chalk';
 class ExtendedClient extends Client {
     public commands: Collection<string, Command> = new Collection();
     public aliases: Collection<string, Command> = new Collection();
+    public categories: Collection<Category, Array<Command>> = new Collection();
     public events: Collection<string, Event> = new Collection();
 
     public config: Config = ConfigJson;
@@ -35,6 +36,14 @@ class ExtendedClient extends Client {
             for (const file of commands) {
                 const { command } = require(`${commandPath}/${dir}/${file}`);
                 this.commands.set(command.name, command);
+                
+                if (!this.categories.has(command.category)) {
+                    this.categories.set(command.category, []);
+                }
+
+                const arr: Array<Command> = this.categories.get(command.category);
+                arr.push(command);
+                this.categories.set(command.category, arr);
 
                 this.logger.log(Severity.INFO, 'Loaded command %s', chalk.gray(command.name));
 

@@ -15,7 +15,7 @@ export const event: Event = {
         roles.add('657947912109555722');
 
         const embed = new Embed(EmbedType.BLACKMT).setTitle(`👋 Welkom ${member.user.username}#${member.user.discriminator}!`)
-        .setDescription(`Welkom @! Emiel in de BlackMT Discord!\nGebruik de buttons hier beneden voor wat meer **informatie**.`)
+        .setDescription(`Welkom ${member.toString()} in de BlackMT Discord!\nGebruik de buttons hier beneden voor wat meer **informatie**.`)
         .setTimestamp().setThumbnail(member.user.displayAvatarURL({ dynamic: true }) || 'https://cdn.discordapp.com/embed/avatars/0.png');
         const welcomeChannel = (await interaction.guild.channels.fetch('893926238073286706') as TextChannel);
         await welcomeChannel.send({ embeds: [embed] });

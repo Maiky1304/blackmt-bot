@@ -6,8 +6,9 @@ interface Run {
 }
 
 export enum Category {
-    FUN = 'Fun',
-    DEVELOPER = 'Developer'
+    FUN = '🛹 Fun',
+    DEVELOPER = '👨‍💻 Developer',
+    GENERAL = 'ℹ️ Algemeen'
 }
 
 export interface Command {
