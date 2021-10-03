@@ -1,14 +1,15 @@
 import Client from '../Client';
-import { Message } from 'discord.js';
+import { Message, PermissionString } from 'discord.js';
 
 interface Run {
     (client: Client, message: Message, args: string[])
 }
 
 export enum Category {
+    GENERAL = 'ℹ️ Algemeen',
     FUN = '🛹 Fun',
-    DEVELOPER = '👨‍💻 Developer',
-    GENERAL = 'ℹ️ Algemeen'
+    MODERATION = '🔨 Moderatie',
+    DEVELOPER = '👨‍💻 Developer'
 }
 
 export interface Command {
@@ -16,5 +17,6 @@ export interface Command {
     category: Category;
     description?: string;
     aliases?: string[];
+    permission?: PermissionString;
     run: Run;
 }

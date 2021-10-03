@@ -1,17 +1,20 @@
 import { Command, Category } from '../../Interfaces';
-import ExtendedClient, { Embed, EmbedType, Severity } from '../../Client';
+import { Embed, EmbedType, Severity } from '../../Client';
 import { GuildMember, MessageEmbed, MessageActionRow, MessageButton, ButtonInteraction } from 'discord.js';
 
 import { inlineCode } from '@discordjs/builders';
 
 import uniqid from 'uniqid';
 
+export class Variables {
+    static mutedRole: string = '894016098121420810';
+}
+
 export const command: Command = {
-    name: 'ban',
+    name: 'mute',
     category: Category.MODERATION,
-    description: 'Ban een member uit de guild',
-    aliases: ['verban'],
-    run: (client: ExtendedClient, message, args) => {
+    description: 'Mute een member in de guild',
+    run: (client, message, args) => {
         const mentionedMembers = message.mentions.members;
         
         if (mentionedMembers.size === 0) {
@@ -19,7 +22,7 @@ export const command: Command = {
                 embeds: [
                     new Embed(EmbedType.WARNING)
                     .setTitle('Fout!').setDescription('Geef de gebruiker op die je wilt \
-                    verbannen.')
+                    muten.')
                 ]
             });
             return;
@@ -27,31 +30,21 @@ export const command: Command = {
 
         const reason = args.length === 1 ? undefined : args.splice(1).join('');
         const target = mentionedMembers.first();
-    
-        if (!target.bannable) {
-            message.reply({
-                embeds: [
-                    new Embed(EmbedType.WARNING)
-                    .setTitle('Fout!').setDescription('Deze gebruiker kun je niet verbannen.')
-                ]
-            });
-            return;
-        }
 
         /**
          * Ban the member that was specified from the guild that the command was executed in
          */
         const guild = message.guild;
-        guild.members.ban(target, { reason: reason }).then(async ({user}: GuildMember) => {    
+        target.roles.add(Variables.mutedRole).then(async ({user}: GuildMember) => {   
             // Log event to console
-            client.logger.log(Severity.INFO, '%s banned the user %s from the guild %s for %s.', message.author.username + '#' + message.author.discriminator, user.username + '#' + user.discriminator, guild.name, reason || 'no reason specified');
+            client.logger.log(Severity.INFO, '%s muted the user %s in the guild %s for %s.', message.author.username + '#' + message.author.discriminator, user.username + '#' + user.discriminator, guild.name, reason || 'no reason specified');
             
             // Send embed to channel to confirm ban
             const embed: MessageEmbed = new Embed(EmbedType.SUCCESS);
 
             if (reason) embed.addField("✍️ Reden", reason, true);
 
-            embed.setTitle('Gebruiker verbannen!').setDescription(`Je hebt succesvol de gebruiker ${inlineCode(`${user.username}#${user.discriminator}`)} verbannen.${reason ? `\n Met als reden ${inlineCode(reason)}.` : ''}`)
+            embed.setTitle('Gebruiker gemute!').setDescription(`Je hebt succesvol de gebruiker ${inlineCode(`${user.username}#${user.discriminator}`)} gemute.${reason ? `\n Met als reden ${inlineCode(reason)}.` : ''}`)
             .setThumbnail(user.avatarURL({ dynamic: true })).setTimestamp().setFooter('✅ Uitgevoerd op');
 
             const buttons = new MessageActionRow();
@@ -79,20 +72,20 @@ export const command: Command = {
                 });
 
                 try {
-                    await guild.bans.remove(user);
-
+                    await target.roles.remove(Variables.mutedRole);                    
+                    
                     // Log event to console
-                    client.logger.log(Severity.INFO, '%s unbanned the user %s from the guild %s.', message.author.username + '#' + message.author.discriminator, user.username + '#' + user.discriminator, guild.name);
+                    client.logger.log(Severity.INFO, '%s unmuted the user %s in the guild %s.', message.author.username + '#' + message.author.discriminator, user.username + '#' + user.discriminator, guild.name);
                     
                     const unbanEmbed: MessageEmbed = new Embed(EmbedType.SUCCESS)
-                    .setTitle('Gebruiker geunbanned!').setDescription(`Je hebt succesvol de gebruiker ${inlineCode(`${user.username}#${user.discriminator}`)} geunbanned.`)
+                    .setTitle('Gebruiker geunmute!').setDescription(`Je hebt succesvol de gebruiker ${inlineCode(`${user.username}#${user.discriminator}`)} geunmute.`)
                     .setThumbnail(user.avatarURL({ dynamic: true })).setTimestamp().setFooter('✅ Uitgevoerd op');
                     button.channel.send({
                         embeds: [unbanEmbed]
                     }).then(msg => client.cleanUp(1000 * 10, msg));
                 } catch(err) {
                     const alreadyUnbannedEmbed: MessageEmbed = new Embed(EmbedType.WARNING)
-                    .setTitle('Gebruiker al geunbanned!').setDescription(`De gebruiker ${inlineCode(`${user.username}#${user.discriminator}`)} zijn/haar ban is al opgeheven.`)
+                    .setTitle('Gebruiker al geunmute!').setDescription(`De gebruiker ${inlineCode(`${user.username}#${user.discriminator}`)} zijn/haar mute is al opgeheven.`)
                     .setThumbnail(user.avatarURL({ dynamic: true }));
                     button.channel.send({
                         embeds: [alreadyUnbannedEmbed]

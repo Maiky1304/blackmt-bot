@@ -83,13 +83,17 @@ class HelpMenu {
         this.state = ViewState.CATEGORY;
         this.currentCategory = category;
 
-        const commands = this.client.categories.get(Category[this.currentCategory]);
+        const commands = this.client.categories.get(Category[this.currentCategory]) || new Array<Command>();
 
         this.embed = new Embed(EmbedType.BLACKMT);
         this.embed.setTitle('📚 Help Menu • ' + Category[this.currentCategory]);
         this.embed.setDescription(`Deze categorie heeft in totaal ${inlineCode(commands.length.toString())} command${commands.length === 1 ? '' : 's'}`)
         for (const command of commands) {
-            this.embed.addField(`ᐳ ${this.client.config.prefix}${command.name}`, `➥ Aliases: ${(!command.aliases || command.aliases.length === 0) ? inlineCode('Geen') :command.aliases.map(key => `${inlineCode(this.client.config.prefix + key)}`).join(', ')}`)
+            const hasPermission: boolean = command.permission ? this.viewer.permissions.has(command.permission) : true;
+            this.embed.addField(`${hasPermission ? '<:small_green_triangle_up:894020646495993887>' : '🔻'} ${this.client.config.prefix}${command.name}`,
+            `${`• Aliases: ${(!command.aliases || command.aliases.length === 0) 
+                ? inlineCode('Geen') : command.aliases.map(key =>
+                `${inlineCode(this.client.config.prefix + key)}`).join(', ')}`}\n• Beschrijving: ${command.description ? inlineCode(command.description) : inlineCode('Geen beschrijving')}`, true);
         } 
         this.embed.setFooter('⌚ Opgehaald op');
         this.embed.setTimestamp();

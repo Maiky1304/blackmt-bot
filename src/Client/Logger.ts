@@ -6,9 +6,6 @@ export class Logger {
     public log(type: Severity, message: string, ...args: any[]) {
         const time = new Date().toISOString()
         .replace(/T/, ' ').replace(/\..+/, '').split(' ')[1];
-
-        
-
         switch(type) {
             case Severity.INFO:
                 console.log(` ${this.chalk.bgCyanBright.black(` ${type.toString()} `)} ${this.chalk.gray(time)} ${message}`, ...args)
