@@ -14,13 +14,6 @@ export const command: Command = {
         embed.setFooter('Dit bericht wordt over 15 seconden automatisch verwijderd...');
         embed.setTimestamp();
 
-        message.channel.send({ embeds: [embed] }).then(sentMessage => setTimeout(() => {
-            try {
-                message.delete();
-                sentMessage.delete();
-            } catch(err) {
-                console.error(err);
-            }
-        }, 15000));
+        message.channel.send({ embeds: [embed] }).then(sent => client.cleanUp(15000, sent, message));
     }
 }

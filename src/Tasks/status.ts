@@ -6,7 +6,7 @@ class Variables {
     static statuses: string[] = [
         '👥 | {members} leden',
         '🎮 | {players} speler{players_s}',
-        '📋 | {tickets} ticket{tickets_s}'
+        '🎟️ | {tickets} ticket{tickets_s}'
     ]
 }
 

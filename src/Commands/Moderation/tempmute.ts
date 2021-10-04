@@ -13,6 +13,7 @@ export const command: Command = {
     name: 'tempmute',
     category: Category.MODERATION,
     description: 'Mute een member tijdelijk in de guild',
+    permission: 'MUTE_MEMBERS',
     run: async (client, message, args) => {
         const mentionedMembers = message.mentions.members;
         
@@ -87,14 +88,18 @@ export const command: Command = {
             buttons.addComponents(undoButton);
 
             const replyMessage = await message.reply({ embeds: [embed], components: [buttons] });
+            const filter = interaction => interaction.channelId === replyMessage.channelId && interaction.customId === undoButton.customId;
             const collector = replyMessage.createMessageComponentCollector({
+                filter,
                 componentType: 'BUTTON',
                 interactionType: 'MESSAGE_COMPONENT',
                 max: 1
             });
             collector.on('collect', async (button: ButtonInteraction) => {
-                if (button.channelId !== replyMessage.channelId) return;
-                if (button.customId !== undoButton.customId) return;
+                if (!(button.member as GuildMember).permissions.has('MUTE_MEMBERS')) {
+                    await button.reply({ content: 'Je hebt hier helaas geen permissions voor!', ephemeral: true });
+                    return;
+                }
 
                 await button.deferUpdate();
 

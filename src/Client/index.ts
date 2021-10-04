@@ -45,7 +45,7 @@ class ExtendedClient extends Client {
                 arr.push(command);
                 this.categories.set(command.category, arr);
 
-                this.logger.log(Severity.INFO, 'Loaded command %s', chalk.gray(command.name));
+                this.logger.log(Severity.INFO, 'Loaded command %s (%s)', chalk.gray(command.name), `${dir}/${file}`);
 
                 if (command.aliases?.length !== 0) {
                     command.aliases?.forEach(alias => {
@@ -56,24 +56,26 @@ class ExtendedClient extends Client {
         });
 
         const eventPath = path.join(__dirname, '..', 'Events');
-        readdirSync(eventPath).forEach(async (file) => {
+        for (const file of readdirSync(eventPath)) {
             const { event } = await import(`${eventPath}/${file}`);
             this.events.set(event.name, event);
 
-            this.logger.log(Severity.INFO, 'Listening for %s', chalk.gray(event.name));
+            this.logger.log(Severity.INFO, 'Listening for %s (%s)', chalk.gray(event.name), file);
 
             this.on(event.name, event.run.bind(null, this));
-        });
+        }
 
-        const taskPath = path.join(__dirname, '..', 'Tasks');
-        readdirSync(taskPath).forEach((file) => {
-            const { task } = require(`${taskPath}/${file}`);
-            if (!this.schedule(task)) {
-                console.error(`Invalid task setup -> ${taskPath}/${file}`);
-            } else {
-                this.logger.log(Severity.INFO, 'Scheduled task at %s', chalk.gray(file));
-            }
-        });
+        setTimeout(() => {
+            const taskPath = path.join(__dirname, '..', 'Tasks');
+            readdirSync(taskPath).forEach((file) => {
+                const { task } = require(`${taskPath}/${file}`);
+                if (!this.schedule(task)) {
+                    console.error(`Invalid task setup -> ${taskPath}/${file}`);
+                } else {
+                    this.logger.log(Severity.INFO, 'Scheduled task at %s', chalk.gray(file));
+                }
+            });
+        }, 1000 * 5);
     }
 
     public schedule(task: Task): boolean {
