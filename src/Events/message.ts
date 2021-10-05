@@ -1,6 +1,6 @@
-import { Event } from '../Interfaces';
+import {Event} from '../Interfaces';
 import {Message, TextChannel} from 'discord.js';
-import { Embed, EmbedType } from '../Client';
+import {Embed, EmbedType, Severity} from '../Client';
 
 export const event: Event = {
     name: 'messageCreate',
@@ -33,7 +33,11 @@ export const event: Event = {
                     return;
                 }
             }
-            command.run(client, message, args);
+            try {
+                command.run(client, message, args);
+            } catch(err) {
+                client.logger.log(Severity.ERROR, err.message);
+            }
         }
     }
 }

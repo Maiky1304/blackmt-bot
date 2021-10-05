@@ -1,10 +1,10 @@
-import { Client, Collection, Intents, Message, MessageEmbed } from 'discord.js';
-import { connect } from 'mongoose';
+import {Client, Collection, Intents, Message} from 'discord.js';
+import {connect} from 'mongoose';
 import path from 'path';
-import { readdirSync } from 'fs';
-import { Command, Event, Config, Task, Category } from '../Interfaces';
+import {readdirSync} from 'fs';
+import {Category, Command, Config, Event, Task} from '../Interfaces';
 import ConfigJson from '../config.json';
-import { Logger, Severity } from './Logger';
+import {Logger, Severity} from './Logger';
 import chalk from 'chalk';
 
 
@@ -27,8 +27,8 @@ class ExtendedClient extends Client {
     }
 
     public async init() {
-        this.login(this.config.token);
-        connect(this.config.mongoURI);
+        this.login(this.config.token).catch(err => this.logger.log(Severity.ERROR, err.message));
+        connect(this.config.mongoURI).catch(err => this.logger.log(Severity.ERROR, err.message));
 
         const commandPath = path.join(__dirname, '..', 'Commands');
         readdirSync(commandPath).forEach(dir => {
@@ -81,10 +81,22 @@ class ExtendedClient extends Client {
 
     public schedule(task: Task): boolean {
         if (task.in && !task.rate) {
-            setTimeout(() => task.run(this), task.in);
+            setTimeout(() => {
+                try {
+                    task.run(this);
+                } catch(err) {
+                    this.logger.log(Severity.ERROR, err.message);
+                }
+            }, task.in);
             return true;
         } else if (!task.in && task.rate) {
-            setInterval(() => task.run(this), task.rate);
+            setInterval(() => {
+                try {
+                    task.run(this);
+                } catch(err) {
+                    this.logger.log(Severity.ERROR, err.message);
+                }
+            }, task.rate);
             return true;
         }
         return false;
