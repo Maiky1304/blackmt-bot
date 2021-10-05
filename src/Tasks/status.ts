@@ -1,5 +1,6 @@
 import { ActivitiesOptions, PresenceData } from 'discord.js';
 import { Task } from '../Interfaces';
+import {TicketModel} from "../Models";
 
 class Variables {
     static index: number = 0;
@@ -13,10 +14,11 @@ class Variables {
 export const task: Task = {
     rate: 5000,
     run: async (client) => {
+        const tickets = await TicketModel.find();
         const guild = await client.guilds.fetch('654593439303991306');
         const text = Variables.statuses[Variables.index]
         .replaceAll('{members}', guild.memberCount.toString())
-        .replaceAll('{players}', '0').replaceAll('{tickets}', '0')
+        .replaceAll('{players}', '0').replaceAll('{tickets}', tickets.length.toString())
         .replaceAll('{players_s}', 's').replaceAll('{tickets_s}', 's');
 
         client.user.setPresence({
