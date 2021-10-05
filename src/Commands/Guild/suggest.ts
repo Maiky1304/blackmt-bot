@@ -27,5 +27,6 @@ export const command: Command = {
 
         const channel = await message.guild.channels.fetch('894956597971931187');
         await (channel as TextChannel).send({embeds:[embed]});
+        await message.reply({ content: `Je suggestie is geplaatst in ${channel}.` });
     }
 }
