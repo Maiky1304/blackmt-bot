@@ -15,7 +15,7 @@ export const event: Event = {
         const member = (interaction.member as GuildMember);
         const roles = (member.roles as GuildMemberRoleManager);
         if (roles.cache.has('657947912109555722')) return;
-        await roles.add(['657947912109555722', '824735567752593450']);
+        await roles.add(['657947912109555722']);
 
         const embed = new Embed(EmbedType.BLACKMT).setTitle(`👋 Welkom ${member.user.username}#${member.user.discriminator}!`)
         .setDescription(`Welkom ${member.toString()} in de BlackMT Discord!\nGebruik de buttons hier beneden voor wat meer **informatie**.`)
