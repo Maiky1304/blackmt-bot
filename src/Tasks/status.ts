@@ -13,7 +13,7 @@ class Variables {
 export const task: Task = {
     rate: 5000,
     run: async (client) => {
-        const guild = await client.guilds.fetch('885275069792788481');
+        const guild = await client.guilds.fetch('654593439303991306');
         const text = Variables.statuses[Variables.index]
         .replaceAll('{members}', guild.memberCount.toString())
         .replaceAll('{players}', '0').replaceAll('{tickets}', '0')

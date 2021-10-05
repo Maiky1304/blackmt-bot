@@ -14,8 +14,8 @@ export const event: Event = {
 
         const member = (interaction.member as GuildMember);
         const roles = (member.roles as GuildMemberRoleManager);
-        if (roles.cache.has('894266482316415027')) return;
-        roles.add('894266482316415027');
+        if (roles.cache.has('657947912109555722')) return;
+        await roles.add(['657947912109555722', '824735567752593450']);
 
         const embed = new Embed(EmbedType.BLACKMT).setTitle(`👋 Welkom ${member.user.username}#${member.user.discriminator}!`)
         .setDescription(`Welkom ${member.toString()} in de BlackMT Discord!\nGebruik de buttons hier beneden voor wat meer **informatie**.`)
@@ -28,7 +28,7 @@ export const event: Event = {
             new MessageButton().setLabel('Store').setEmoji('🛒')
             .setURL('https://store.blackmt.nl').setStyle('LINK'));
 
-        const welcomeChannel = (await interaction.guild.channels.fetch('893926238073286706') as TextChannel);
+        const welcomeChannel = (await interaction.guild.channels.fetch('689612484486758432') as TextChannel);
         await welcomeChannel.send({ embeds: [embed], components: [buttons] });
     }
 }
