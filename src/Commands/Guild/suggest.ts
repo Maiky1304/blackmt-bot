@@ -26,7 +26,11 @@ export const command: Command = {
             .setTimestamp();
 
         const channel = await message.guild.channels.fetch('894956597971931187');
-        await (channel as TextChannel).send({embeds:[embed]});
+        (channel as TextChannel).send({embeds:[embed]}).then(async msg => {
+            for (const emoji of ['797830310045155379', '797832538151845928']) {
+                await msg.react(emoji);
+            }
+        });
         await message.reply({ content: `Je suggestie is geplaatst in ${channel}.` });
     }
 }
