@@ -1,6 +1,6 @@
 import {Event} from '../Interfaces';
 import {ProfileModel} from '../Models';
-import {Message} from "discord.js";
+import {Message, ReplyMessageOptions} from "discord.js";
 import {Embed, EmbedType} from "../Client";
 
 export const event: Event = {
@@ -33,7 +33,7 @@ export const event: Event = {
                 new Embed(EmbedType.BLACKMT)
                     .setTitle('🆙 Level up!')
                     .setDescription('Je bent nu level **' + freshProfile.level + '**, gefeliciteerd!')
-                ] });
+                ], ephemeral: true } as ReplyMessageOptions);
         }
     }
 }

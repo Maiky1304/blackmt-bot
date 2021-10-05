@@ -29,7 +29,7 @@ export const command: Command = {
             return;
         }
 
-        const reason = args.length === 1 ? undefined : args.splice(1).join('');
+        const reason = args.length === 1 ? undefined : args.splice(1).join(' ');
         const target = mentionedMembers.first();
 
         /**

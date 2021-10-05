@@ -55,7 +55,7 @@ export const command: Command = {
             return;
         }
         
-        const reason = args.length === 2 ? undefined : args.splice(2).join('');
+        const reason = args.length === 2 ? undefined : args.splice(2).join(' ');
         const target = mentionedMembers.first();
     
         if (!target.bannable) {
