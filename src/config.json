@@ -1,5 +1,36 @@
 {
-    "token": "ODY1NzYwMTI2Njk5MDQ0ODg1.YPIr8w.MTyNQpRCz6_i9tLYq7VL0NjvcSs",
-    "prefix": "!",
-    "mongoURI": "mongodb+srv://maiky:tkp2jS6GZYIeaSGF@cluster0.npbkw.mongodb.net/gertbot?retryWrites=true&w=majority"
+    "token": "ODk0OTAxMTc0MDQwNDI0NDQ4.YVwvqg.J4XQ1O-h7b7GmV9PqN5Lhbp5oKM",
+    "prefix": "b/",
+    "mongoURI": "mongodb+srv://maiky:tkp2jS6GZYIeaSGF@cluster0.npbkw.mongodb.net/gertbot?retryWrites=true&w=majority",
+    "developerMode": false,
+    "default": {
+        "guildId": "654593439303991306",
+        "ticketSettings": {
+            "ticketCategoryId": "894948133119868938",
+            "ticketStaffRoleId": "685843305535242279"
+        },
+        "verifySettings": {
+            "role": "657947912109555722",
+            "welcomeChannel": "689612484486758432"
+        },
+        "suggestionSettings": {
+            "emojis": ["797830310045155379", "797832538151845928"],
+            "channel": "894956597971931187"
+        }
+    },
+    "developer": {
+        "guildId": "895588051689041941",
+        "ticketSettings": {
+            "ticketCategoryId": "895588052200742947",
+            "ticketStaffRoleId": "895588052087492629"
+        },
+        "verifySettings": {
+            "role": "895588052100059155",
+            "welcomeChannel": "895588052414644237"
+        },
+        "suggestionSettings": {
+            "emojis": ["797830310045155379", "797832538151845928"],
+            "channel": "895588052800532535"
+        }
+    }
 }
