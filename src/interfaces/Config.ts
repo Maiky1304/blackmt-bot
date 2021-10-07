@@ -1,21 +1,32 @@
-interface ServerSettings {
+export interface ServerSettings {
     guildId: string;
     verifySettings: VerifySettings;
     suggestionSettings: SuggestionSettings;
     ticketSettings: TicketSettings;
+    roleSettings: RoleSettings;
 }
 
-interface TicketSettings {
+export interface RoleSettingsData {
+    name: string;
+    id: string;
+    emoji: string;
+}
+
+export interface RoleSettings {
+    roles: RoleSettingsData[];
+}
+
+export interface TicketSettings {
     ticketCategoryId: string;
     ticketStaffRoleId: string;
 }
 
-interface VerifySettings {
+export interface VerifySettings {
     role: string;
     welcomeChannel: string;
 }
 
-interface SuggestionSettings {
+export interface SuggestionSettings {
     emojis: string[];
     channel: string;
 }

@@ -1,8 +1,8 @@
-import { Task } from '../interfaces';
-import { MuteModel } from '../models';
+import {Task} from '../interfaces';
+import {MuteModel} from '../models';
 
-import { Variables as MuteVariables } from '../commands/moderation/mute';
-import ExtendedClient, { Severity } from '../client';
+import {Variables as MuteVariables} from '../commands/moderation/mute';
+import ExtendedClient, {Severity} from '../client';
 
 export const task: Task = {
     rate: 1000,

@@ -2,7 +2,6 @@ import {Category, Command} from '../../interfaces';
 import {TicketModel} from "../../models";
 import {MessageEmbed} from "discord.js";
 import {Embed, EmbedType} from "../../client";
-import dateformat from 'dateformat';
 
 export const command: Command = {
     name: 'ticketinfo',

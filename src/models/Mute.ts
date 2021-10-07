@@ -1,4 +1,4 @@
-import { Schema, model, Document } from 'mongoose';
+import {Document, model, Schema} from 'mongoose';
 
 export interface Mute extends Document {
     userId: string,

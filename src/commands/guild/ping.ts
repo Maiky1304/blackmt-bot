@@ -1,6 +1,6 @@
-import { MessageEmbed } from 'discord.js';
-import { Command, Category } from '../../interfaces';
-import { bold } from '@discordjs/builders';
+import {MessageEmbed} from 'discord.js';
+import {Category, Command} from '../../interfaces';
+import {bold} from '@discordjs/builders';
 
 export const command: Command = {
     name: 'ping',

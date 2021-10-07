@@ -1,6 +1,14 @@
-import { ButtonInteraction, GuildMember, GuildMemberRoleManager, Interaction, TextChannel, MessageActionRow, MessageButton } from "discord.js";
-import { Event } from '../interfaces';
-import { Embed, EmbedType } from '../client';
+import {
+    ButtonInteraction,
+    GuildMember,
+    GuildMemberRoleManager,
+    Interaction,
+    MessageActionRow,
+    MessageButton,
+    TextChannel
+} from "discord.js";
+import {Event} from '../interfaces';
+import {Embed, EmbedType} from '../client';
 
 export const event: Event = {
     name: 'interactionCreate',

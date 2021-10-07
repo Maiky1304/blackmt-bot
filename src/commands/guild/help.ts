@@ -1,8 +1,23 @@
-import { Category, Command } from '../../interfaces';
+import {Category, Command} from '../../interfaces';
 import uniqid from 'uniqid';
-import ExtendedClient, { Embed, EmbedType, Severity } from '../../client';
-import { GuildMember, Message, MessageActionRow, MessageButton, MessageEmbed, Collection, TextChannel, InteractionCollectorOptions, MessageComponentInteraction, InteractionCollector, ButtonInteraction, MessagePayload, MessageEditOptions, MessageSelectMenu, MessageSelectOptionData, SelectMenuInteraction } from 'discord.js';
-import { inlineCode, hyperlink } from '@discordjs/builders';
+import ExtendedClient, {Embed, EmbedType, Severity} from '../../client';
+import {
+    Collection,
+    GuildMember,
+    InteractionCollector,
+    InteractionCollectorOptions,
+    Message,
+    MessageActionRow,
+    MessageButton,
+    MessageComponentInteraction,
+    MessageEditOptions,
+    MessageEmbed,
+    MessageSelectMenu,
+    MessageSelectOptionData,
+    SelectMenuInteraction,
+    TextChannel
+} from 'discord.js';
+import {hyperlink, inlineCode} from '@discordjs/builders';
 
 enum ViewState {
     OVERVIEW, CATEGORY

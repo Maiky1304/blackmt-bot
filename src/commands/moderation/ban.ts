@@ -1,8 +1,8 @@
-import { Command, Category } from '../../interfaces';
-import ExtendedClient, { Embed, EmbedType, Severity } from '../../client';
-import { GuildMember, MessageEmbed, MessageActionRow, MessageButton, ButtonInteraction } from 'discord.js';
+import {Category, Command} from '../../interfaces';
+import ExtendedClient, {Embed, EmbedType, Severity} from '../../client';
+import {ButtonInteraction, GuildMember, MessageActionRow, MessageButton, MessageEmbed} from 'discord.js';
 
-import { inlineCode } from '@discordjs/builders';
+import {inlineCode} from '@discordjs/builders';
 
 import uniqid from 'uniqid';
 

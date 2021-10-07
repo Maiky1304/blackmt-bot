@@ -1,6 +1,6 @@
-import { Embed, EmbedType } from '../../client';
-import { Category, Command } from '../../interfaces';
-import { TicketModel, Context } from '../../models';
+import {Embed, EmbedType} from '../../client';
+import {Category, Command} from '../../interfaces';
+import {Context, TicketModel} from '../../models';
 import {ReplyMessageOptions, TextChannel} from "discord.js";
 
 export const command: Command = {

@@ -1,8 +1,8 @@
-import { inlineCode } from '@discordjs/builders';
-import { MessageEmbed } from 'discord.js';
-import { Embed, EmbedType } from '../../client';
-import { Category, Command } from '../../interfaces';
-import { VariableModel, Variable } from '../../models';
+import {inlineCode} from '@discordjs/builders';
+import {MessageEmbed} from 'discord.js';
+import {Embed, EmbedType} from '../../client';
+import {Category, Command} from '../../interfaces';
+import {Variable, VariableModel} from '../../models';
 
 export const command: Command = {
     name: 'variable',

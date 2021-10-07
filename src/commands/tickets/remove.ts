@@ -1,16 +1,14 @@
 import {Category, Command} from '../../interfaces';
-import {TicketModel} from "../../models";
 import {Embed, EmbedType} from "../../client";
 import {TextChannel} from "discord.js";
+import {middleware} from "./middleware/ticket.middleware";
 
 export const command: Command = {
     name: 'remove',
     category: Category.TICKETS,
     description: 'Verwijder iemand uit de ticket',
     permission: 'ADMINISTRATOR',
-    middleware: async (channel, _member): Promise<boolean> => {
-        return await TicketModel.isTicket(channel);
-    },
+    middleware: middleware,
     run: async (client, message, args) => {
         if (args.length !== 1) {
             message.reply({

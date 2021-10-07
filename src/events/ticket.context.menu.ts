@@ -1,5 +1,5 @@
 import {Event} from '../interfaces';
-import {MessageComponentInteraction, SelectMenuInteraction} from "discord.js";
+import {MessageComponentInteraction} from "discord.js";
 import {Context, TicketModel} from '../models';
 
 export const event: Event = {

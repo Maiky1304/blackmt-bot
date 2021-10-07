@@ -3,6 +3,7 @@ import {Context, TicketModel} from "../../models";
 import {ConfirmMenu} from "../../menu";
 import {TextChannel} from "discord.js";
 import {Embed, EmbedType} from "../../client";
+import {middleware} from "./middleware/ticket.middleware";
 
 export const command: Command = {
     name: 'reopen',
@@ -10,9 +11,7 @@ export const command: Command = {
     description: 'Heropen een gesloten ticket',
     permission: 'ADMINISTRATOR',
     aliases: ['heropen'],
-    middleware: async (channel, _member): Promise<boolean> => {
-        return await TicketModel.isTicket(channel);
-    },
+    middleware: middleware,
     run: async (client, message, args) => {
         const ticket = await TicketModel.findOne({ channelId: message.channel.id });
 

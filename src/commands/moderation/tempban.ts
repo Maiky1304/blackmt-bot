@@ -1,9 +1,9 @@
-import { Command, Category } from '../../interfaces';
-import { Embed, EmbedType, Severity } from '../../client';
-import { BanModel } from '../../models';
-import { ButtonInteraction, GuildMember, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js';
+import {Category, Command} from '../../interfaces';
+import {Embed, EmbedType, Severity} from '../../client';
+import {BanModel} from '../../models';
+import {ButtonInteraction, GuildMember, MessageActionRow, MessageButton, MessageEmbed} from 'discord.js';
 
-import { inlineCode } from '@discordjs/builders';
+import {inlineCode} from '@discordjs/builders';
 
 import ms from 'ms';
 import uniqid from 'uniqid';

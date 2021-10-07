@@ -1,4 +1,4 @@
-import { Chalk, Instance as ChalkInstance } from 'chalk';
+import {Chalk, Instance as ChalkInstance} from 'chalk';
 
 export class Logger {
     public chalk: Chalk = new ChalkInstance();

@@ -1,4 +1,4 @@
-import Client, { Severity } from './client';
+import Client, {Severity} from './client';
 
 const client = new Client();
 try {

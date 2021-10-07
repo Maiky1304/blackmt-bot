@@ -1,4 +1,4 @@
-import { MessageEmbed } from "discord.js";
+import {MessageEmbed} from "discord.js";
 
 export enum EmbedType {
     ERROR = '#cc0000',

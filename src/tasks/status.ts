@@ -1,5 +1,5 @@
-import { ActivitiesOptions, PresenceData } from 'discord.js';
-import { Task } from '../interfaces';
+import {ActivitiesOptions, PresenceData} from 'discord.js';
+import {Task} from '../interfaces';
 import {TicketModel} from "../models";
 import ExtendedClient from "../client";
 
@@ -16,7 +16,7 @@ export const task: Task = {
     rate: 5000,
     run: async (client: ExtendedClient) => {
         const tickets = await TicketModel.find();
-        const guild = await client.guilds.fetch(client.config.default.guildId);
+        const guild = await client.guilds.fetch(client.config.developerMode ? client.config.developer.guildId : client.config.default.guildId);
         const text = Variables.statuses[Variables.index]
         .replaceAll('{members}', guild.memberCount.toString())
         .replaceAll('{players}', '0').replaceAll('{tickets}', tickets.length.toString())

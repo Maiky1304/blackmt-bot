@@ -1,5 +1,5 @@
-import { Task } from '../interfaces';
-import { BanModel } from '../models';
+import {Task} from '../interfaces';
+import {BanModel} from '../models';
 
 export const task: Task = {
     rate: 1000,

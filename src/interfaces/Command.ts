@@ -10,7 +10,8 @@ export enum Category {
     FUN = '🛹 Fun',
     MODERATION = '🔨 Moderatie',
     DEVELOPER = '👨‍💻 Developer',
-    TICKETS = '📝 Tickets'
+    TICKETS = '📝 Tickets',
+    ECONOMY = '💰 Economy'
 }
 
 export interface Middleware {

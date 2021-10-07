@@ -1,6 +1,6 @@
 import chalk from 'chalk';
-import { Severity } from '../client/Logger';
-import { Event } from '../interfaces';
+import {Severity} from '../client/Logger';
+import {Event} from '../interfaces';
 
 export const event: Event = {
     name: 'ready',

@@ -1,13 +1,13 @@
-import { Command, Category } from '../../interfaces';
-import { Embed, EmbedType, Severity } from '../../client';
-import { MuteModel } from '../../models';
-import { ButtonInteraction, GuildMember, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js';
+import {Category, Command} from '../../interfaces';
+import {Embed, EmbedType, Severity} from '../../client';
+import {MuteModel} from '../../models';
+import {ButtonInteraction, GuildMember, MessageActionRow, MessageButton, MessageEmbed} from 'discord.js';
 
-import { inlineCode } from '@discordjs/builders';
+import {inlineCode} from '@discordjs/builders';
 
 import ms from 'ms';
 import uniqid from 'uniqid';
-import { Variables } from './mute';
+import {Variables} from './mute';
 
 export const command: Command = {
     name: 'tempmute',

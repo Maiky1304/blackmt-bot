@@ -2,15 +2,14 @@ import {Category, Command} from '../../interfaces';
 import {TicketModel} from "../../models";
 import {ConfirmMenu} from "../../menu";
 import {TextChannel} from "discord.js";
+import {middleware} from "./middleware/ticket.middleware";
 
 export const command: Command = {
     name: 'delete',
     category: Category.TICKETS,
     description: 'Verwijder de huidige ticket',
     permission: 'ADMINISTRATOR',
-    middleware: async (channel, _member): Promise<boolean> => {
-        return await TicketModel.isTicket(channel);
-    },
+    middleware: middleware,
     run: async (client, message, args) => {
         const ticket = await TicketModel.findOne({ channelId: message.channel.id });
 

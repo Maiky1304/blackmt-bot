@@ -1,4 +1,4 @@
-import { Schema, model, Document, Model } from 'mongoose';
+import {Document, model, Model, Schema} from 'mongoose';
 
 export interface Profile extends Document {
     userId: string,

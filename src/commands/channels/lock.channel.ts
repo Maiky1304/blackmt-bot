@@ -1,4 +1,4 @@
-import { Category, Command } from '../../interfaces';
+import {Category, Command} from '../../interfaces';
 
 export const command: Command = {
     name: 'lockchannel',

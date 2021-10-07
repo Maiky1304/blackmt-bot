@@ -1,7 +1,7 @@
 import {Category, Command} from '../../interfaces';
 import {ProfileModel} from "../../models";
 import {Embed, EmbedType} from "../../client";
-import {bold, inlineCode} from "@discordjs/builders";
+import {inlineCode} from "@discordjs/builders";
 import {ReplyMessageOptions} from "discord.js";
 
 export const command: Command = {
