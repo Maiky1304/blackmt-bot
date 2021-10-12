@@ -9,7 +9,7 @@ import {translateNumber} from "./functions/translate.number";
 export const command: Command = {
     name: 'withdraw',
     description: 'Neem geld op van je bank',
-    aliases: ['dep', 'neemop', 'opnemen'],
+    aliases: ['wit', 'neemop', 'opnemen'],
     category: Category.ECONOMY,
     middleware: middleware,
     run: async (client, message, args) => {

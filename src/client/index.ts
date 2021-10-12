@@ -36,22 +36,26 @@ class ExtendedClient extends Client {
 
             for (const file of commands) {
                 const { command } = require(`${commandPath}/${dir}/${file}`);
-                this.commands.set(command.name, command);
-                
-                if (!this.categories.has(command.category)) {
-                    this.categories.set(command.category, []);
-                }
+                try {
+                    this.commands.set(command.name, command);
 
-                const arr: Array<Command> = this.categories.get(command.category);
-                arr.push(command);
-                this.categories.set(command.category, arr);
+                    if (!this.categories.has(command.category)) {
+                        this.categories.set(command.category, []);
+                    }
 
-                this.logger.log(Severity.INFO, 'Loaded command %s (%s)', chalk.gray(command.name), `${dir}/${file}`);
+                    const arr: Array<Command> = this.categories.get(command.category);
+                    arr.push(command);
+                    this.categories.set(command.category, arr);
 
-                if (command.aliases?.length !== 0) {
-                    command.aliases?.forEach(alias => {
-                        this.aliases.set(alias, command);
-                    })
+                    this.logger.log(Severity.INFO, 'Loaded command %s (%s)', chalk.gray(command.name), `${dir}/${file}`);
+
+                    if (command.aliases?.length !== 0) {
+                        command.aliases?.forEach(alias => {
+                            this.aliases.set(alias, command);
+                        })
+                    }
+                } catch(err) {
+                    this.logger.log(Severity.ERROR, `[${dir}/${file}] -> ${err.message}`);
                 }
             }
         });

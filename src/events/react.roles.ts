@@ -1,14 +1,13 @@
 import {Event} from '../interfaces';
 import {GuildMember, SelectMenuInteraction} from "discord.js";
 import {ServerSettings} from "../interfaces/Config";
+import {bold} from "@discordjs/builders";
 
 export const event: Event = {
     name: 'interactionCreate',
     run: async (client, menu: SelectMenuInteraction) => {
         if (menu.customId !== 'role-menu-rr') return;
         if (!menu.isSelectMenu()) return;
-
-        await menu.deferUpdate();
 
         const serverSettings: ServerSettings = client.config.developerMode ? client.config.developer : client.config.default;
 
@@ -28,5 +27,7 @@ export const event: Event = {
             if ((menu.member as GuildMember).roles.cache.has(role)) continue;
             await (menu.member as GuildMember).roles.add(role);
         }
+
+        await menu.reply({ content: '✅ ' + bold('Rollen update succesvol!'), ephemeral: true });
     }
 }

@@ -7,7 +7,7 @@ export const event: Event = {
     run: async (client, message: Message) => {
         const guildId = client.config.developerMode ? client.config.developer.guildId : client.config.default.guildId;
         if (message.guildId !== guildId) return;
-        if (message.author.bot || !message.guild || !message.content.startsWith(client.config.prefix) || !message.channel.isText) return;
+        if (message.author.bot || !message.guild || (!message.content.startsWith(client.config.prefix.toUpperCase()) || !message.content.startsWith(client.config.prefix.toLowerCase())) || !message.channel.isText) return;
 
         const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
         const cmd = args.shift().toLowerCase();

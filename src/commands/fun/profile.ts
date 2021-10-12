@@ -10,7 +10,7 @@ export const command: Command = {
     description: 'Bekijk je profiel',
     aliases: ['profiel', 'level', 'userstats'],
     run: async (client, message, args) => {
-        const {level, xp} = await ProfileModel.findOne({ userId: message.author.id });
+        const {level, xp, points} = await ProfileModel.findOne({ userId: message.author.id });
         const nextLevel = level * 8;
 
         const progress = Math.floor((xp / nextLevel) * 100);
@@ -27,6 +27,11 @@ export const command: Command = {
             {
                 name: '📥 XP',
                 value: inlineCode(`${xp} XP`),
+                inline: true
+            },
+            {
+                name: '🪙 Punten',
+                value: inlineCode(`${points}`),
                 inline: true
             }
         ]);

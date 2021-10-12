@@ -21,7 +21,7 @@ export const command: Command = {
                 label: rsd.name,
                 value: `rr-${rsd.id}`,
                 emoji: rsd.emoji,
-                description: `Selecteer dit om de ${rsd.name} rol te ontvangen.`
+                description: `Selecteer dit om de ${rsd.name} rol te ontvangen/verwijderen.`
             } as MessageSelectOptionData)
         }
 
